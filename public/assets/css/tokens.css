@@ -1,0 +1,28 @@
+/* Design tokens JGS — ubah di sini untuk mengganti warna, font, dan jarak seluruh website. */
+:root {
+  --orange: #F47B20;
+  --orange-600: #D9650F;
+  --orange-100: #FDEBDC;
+  --white: #FFFFFF;
+  --navy: #102747;
+  --navy-800: #0B1C34;
+  --navy-700: #16335C;
+  --navy-100: #E6EBF3;
+  --ink: #1B2A41;
+  --muted: #5B6B82;
+  --line: #E3E8F0;
+  --surface: #F6F8FB;
+
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+
+  --container: 1180px;
+  --gutter: clamp(1rem, 4vw, 2rem);
+  --radius: 14px;
+  --radius-sm: 8px;
+  --shadow-sm: 0 2px 8px rgba(16, 39, 71, .08);
+  --shadow: 0 12px 32px rgba(16, 39, 71, .12);
+  --shadow-lg: 0 24px 60px rgba(16, 39, 71, .22);
+  --header-h: 76px;
+  --ease: cubic-bezier(.22, .61, .36, 1);
+}
