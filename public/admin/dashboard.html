@@ -1,1 +1,496 @@
-Admin Dashboard JGS
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JGS Admin Dashboard</title>
+
+<style>
+:root {
+    --navy: #101d35;
+    --navy-light: #192b49;
+    --orange: #f28b24;
+    --bg: #f4f6fa;
+    --white: #ffffff;
+    --text: #26344a;
+    --muted: #8490a3;
+    --border: #e8ecf2;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    position: fixed;
+    width: 255px;
+    height: 100vh;
+    background: var(--navy);
+    color: white;
+    padding: 28px 18px;
+    overflow-y: auto;
+}
+
+.brand {
+    padding: 0 12px 30px;
+    border-bottom: 1px solid rgba(255,255,255,.12);
+}
+
+.brand h2 {
+    font-size: 22px;
+    letter-spacing: 2px;
+}
+
+.brand h2 span {
+    color: var(--orange);
+}
+
+.brand p {
+    color: #aab5c7;
+    font-size: 11px;
+    margin-top: 7px;
+    letter-spacing: 2px;
+}
+
+.menu-label {
+    font-size: 10px;
+    color: #8494ae;
+    letter-spacing: 2px;
+    margin: 28px 12px 12px;
+}
+
+.menu a {
+    display: block;
+    text-decoration: none;
+    color: #c4cede;
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    margin-bottom: 5px;
+    transition: .2s;
+}
+
+.menu a:hover,
+.menu a.active {
+    background: var(--navy-light);
+    color: white;
+    border-left: 3px solid var(--orange);
+}
+
+.menu a span {
+    margin-right: 10px;
+}
+
+/* MAIN */
+
+.main {
+    margin-left: 255px;
+    padding: 30px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    gap: 15px;
+}
+
+.topbar h1 {
+    font-size: 25px;
+    color: var(--navy);
+}
+
+.topbar p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 7px;
+}
+
+.admin-profile {
+    background: white;
+    padding: 11px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    border: 1px solid var(--border);
+}
+
+/* WELCOME */
+
+.welcome {
+    background: linear-gradient(120deg, #101d35, #243c60);
+    color: white;
+    padding: 30px;
+    border-radius: 14px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 28px;
+}
+
+.welcome:after {
+    content: "";
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    background: var(--orange);
+    opacity: .12;
+    transform: rotate(35deg);
+    right: -55px;
+    top: -80px;
+}
+
+.welcome h2 {
+    font-size: 23px;
+    margin-bottom: 10px;
+}
+
+.welcome p {
+    font-size: 13px;
+    color: #d0d9e7;
+    line-height: 1.7;
+    max-width: 600px;
+}
+
+/* SECTION */
+
+.section-title {
+    font-size: 17px;
+    color: var(--navy);
+    margin-bottom: 16px;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 32px;
+}
+
+.stat-card {
+    background: white;
+    padding: 22px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+}
+
+.stat-card .icon {
+    font-size: 23px;
+    margin-bottom: 15px;
+}
+
+.stat-card h3 {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.stat-card p {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+/* MANAGEMENT GRID */
+
+.management-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 32px;
+}
+
+.module {
+    background: white;
+    padding: 22px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    transition: .2s;
+}
+
+.module:hover {
+    transform: translateY(-3px);
+    border-color: var(--orange);
+    box-shadow: 0 8px 25px rgba(16,29,53,.06);
+}
+
+.module .icon {
+    width: 43px;
+    height: 43px;
+    background: #fff3e6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    font-size: 21px;
+    margin-bottom: 15px;
+}
+
+.module h3 {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.module p {
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--muted);
+}
+
+.status {
+    display: inline-block;
+    font-size: 10px;
+    color: #a66b1e;
+    background: #fff3df;
+    padding: 5px 9px;
+    border-radius: 20px;
+    margin-top: 14px;
+}
+
+/* FOOTER */
+
+.footer {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 1000px) {
+    .management-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 700px) {
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .main {
+        margin-left: 0;
+        padding: 20px;
+    }
+
+    .stats,
+    .management-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="brand">
+        <h2>JGS<span>.</span></h2>
+        <p>GLOBAL SERVICES</p>
+    </div>
+
+    <div class="menu-label">MAIN MENU</div>
+
+    <nav class="menu">
+        <a href="#" class="active"><span>▦</span> Dashboard</a>
+    </nav>
+
+    <div class="menu-label">WEBSITE MANAGEMENT</div>
+
+    <nav class="menu">
+        <a href="#pages"><span>▤</span> Page Manager</a>
+        <a href="#services"><span>◈</span> Services Manager</a>
+        <a href="#business"><span>▧</span> Business Focus</a>
+        <a href="#clients"><span>♙</span> Clients Manager</a>
+        <a href="#media"><span>▣</span> Media Library</a>
+        <a href="#news"><span>▤</span> News & Activities</a>
+    </nav>
+
+    <div class="menu-label">SYSTEM SETTINGS</div>
+
+    <nav class="menu">
+        <a href="#design"><span>◉</span> Design Manager</a>
+        <a href="#language"><span>文</span> Language Manager</a>
+        <a href="#seo"><span>⌕</span> SEO Settings</a>
+        <a href="#settings"><span>⚙</span> General Settings</a>
+    </nav>
+
+    <div class="menu-label">WEBSITE</div>
+
+    <nav class="menu">
+        <a href="../index.html" target="_blank">
+            <span>↗</span> View Public Website
+        </a>
+    </nav>
+
+</aside>
+
+
+<!-- MAIN CONTENT -->
+
+<main class="main">
+
+    <header class="topbar">
+        <div>
+            <h1>Admin Dashboard</h1>
+            <p>Jagaraya Global Services — Website Management System</p>
+        </div>
+
+        <div class="admin-profile">
+            ⚙ Administrator
+        </div>
+    </header>
+
+
+    <section class="welcome">
+        <h2>Welcome to JGS Website Manager</h2>
+        <p>
+            Kelola konten website Jagaraya Global Services melalui
+            satu pusat pengelolaan. Nantinya kamu dapat mengatur
+            halaman, layanan, gambar, berita, identitas perusahaan,
+            dan berbagai pengaturan website dari dashboard ini.
+        </p>
+    </section>
+
+
+    <h2 class="section-title">Website Overview</h2>
+
+    <section class="stats">
+
+        <div class="stat-card">
+            <div class="icon">🌐</div>
+            <h3>Public Website</h3>
+            <p>Website utama JGS yang sudah online.</p>
+        </div>
+
+        <div class="stat-card">
+            <div class="icon">📄</div>
+            <h3>Website Pages</h3>
+            <p>Home, About, Services, Business Focus, Clients, Contact.</p>
+        </div>
+
+        <div class="stat-card">
+            <div class="icon">🛠️</div>
+            <h3>Management System</h3>
+            <p>Dashboard awal sedang dalam tahap pengembangan.</p>
+        </div>
+
+    </section>
+
+
+    <h2 class="section-title">Content Management</h2>
+
+    <section class="management-grid">
+
+        <div class="module" id="pages">
+            <div class="icon">📄</div>
+            <h3>Page Manager</h3>
+            <p>Mengelola judul, teks, banner, dan konten seluruh halaman website.</p>
+            <span class="status">Coming Soon</span>
+        </div>
+
+        <div class="module" id="services">
+            <div class="icon">⚙️</div>
+            <h3>Services Manager</h3>
+            <p>Mengelola informasi delapan layanan utama JGS.</p>
+            <span class="status">Coming Soon</span>
+        </div>
+
+        <div class="module" id="business">
+            <div class="icon">🏢</div>
+            <h3>Business Focus</h3>
+            <p>Mengelola sembilan sektor bisnis fokus perusahaan.</p>
+            <span class="status">Coming Soon</span>
+        </div>
+
+        <div class="module" id="clients">
+            <div class="icon">🤝</div>
+            <h3>Clients Manager</h3>
+            <p>Mengelola daftar klien, logo, dan informasi kerja sama.</p>
+            <span class="status">Coming Soon</span>
+        </div>
+
+        <div class="module" id="media">
+            <div class="icon">🖼️</div>
+            <h3>Media Library</h3>
+            <p>Pusat pengelolaan foto, video, logo, dan dokumen perusahaan.</p>
+            <span class="status">Coming Soon</span>
+        </div>
+
+        <div class="module" id="news">
+            <div class="icon">📰</div>
+            <h3>News & Activities</h3>
+            <p>Membuat dan mengelola berita serta aktivitas terbaru JGS.</p>
+            <span class="status">Coming Soon</span>
+        </div>
+
+    </section>
+
+
+    <h2 class="section-title">System Configuration</h2>
+
+    <section class="management-grid">
+
+        <div class="module" id="design">
+            <div class="icon">🎨</div>
+            <h3>Design Manager</h3>
+            <p>Mengatur warna, tipografi, tampilan, dan identitas visual website.</p>
+            <span class="status">Coming Soon</span>
+        </div>
+
+        <div class="module" id="language">
+            <div class="icon">🌏</div>
+            <h3>Language Manager</h3>
+            <p>Mempersiapkan pengelolaan konten Bahasa Indonesia dan Inggris.</p>
+            <span class="status">Coming Soon</span>
+        </div>
+
+        <div class="module" id="seo">
+            <div class="icon">🔎</div>
+            <h3>SEO Settings</h3>
+            <p>Mengelola judul halaman, deskripsi, dan pengaturan pencarian.</p>
+            <span class="status">Coming Soon</span>
+        </div>
+
+        <div class="module" id="settings">
+            <div class="icon">🔧</div>
+            <h3>General Settings</h3>
+            <p>Mengelola informasi perusahaan dan konfigurasi website.</p>
+            <span class="status">Coming Soon</span>
+        </div>
+
+    </section>
+
+
+    <footer class="footer">
+        <strong>JAGARAYA GLOBAL SERVICES</strong><br>
+        Facility Service Solution<br>
+        JGS Website Management System
+        <br><br>
+        © 2026 Jagaraya Global Services. All Rights Reserved.
+    </footer>
+
+</main>
+
+</body>
+</html>
