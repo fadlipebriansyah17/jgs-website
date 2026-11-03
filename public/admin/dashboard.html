@@ -3,18 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JGS Admin Dashboard</title>
+<meta name="theme-color" content="#101827">
+<title>Admin Dashboard | JGS</title>
 
 <style>
 :root {
-    --navy: #101d35;
-    --navy-light: #192b49;
-    --orange: #f28b24;
-    --bg: #f4f6fa;
+    --navy: #101827;
+    --navy-light: #19263a;
+    --navy-soft: #22324a;
+    --orange: #f47721;
+    --orange-light: #ff974d;
+    --bg: #f3f5f9;
     --white: #ffffff;
-    --text: #26344a;
-    --muted: #8490a3;
-    --border: #e8ecf2;
+    --text: #172033;
+    --muted: #8b95a7;
+    --border: #e7eaf0;
+    --green: #22a477;
+    --radius: 14px;
 }
 
 * {
@@ -24,275 +29,632 @@
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
     background: var(--bg);
     color: var(--text);
+    min-height: 100vh;
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
+    border: none;
+}
+
+.app {
+    display: flex;
+    min-height: 100vh;
 }
 
 /* SIDEBAR */
 
 .sidebar {
-    position: fixed;
-    width: 255px;
-    height: 100vh;
+    width: 260px;
     background: var(--navy);
     color: white;
-    padding: 28px 18px;
-    overflow-y: auto;
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    transition: transform .3s ease;
 }
 
 .brand {
-    padding: 0 12px 30px;
-    border-bottom: 1px solid rgba(255,255,255,.12);
+    height: 90px;
+    padding: 22px 25px;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
 }
 
-.brand h2 {
-    font-size: 22px;
+.brand-icon {
+    width: 43px;
+    height: 43px;
+    border-radius: 12px;
+    background: var(--orange);
+    display: grid;
+    place-items: center;
+    font-size: 19px;
+    font-weight: 900;
+    color: white;
+    transform: skew(-5deg);
+}
+
+.brand-name {
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: .8px;
+}
+
+.brand-sub {
+    color: #9ca9bd;
+    font-size: 10px;
     letter-spacing: 2px;
+    margin-top: 4px;
 }
 
-.brand h2 span {
-    color: var(--orange);
-}
-
-.brand p {
-    color: #aab5c7;
-    font-size: 11px;
-    margin-top: 7px;
-    letter-spacing: 2px;
+.sidebar-content {
+    padding: 25px 15px;
+    overflow-y: auto;
+    flex: 1;
 }
 
 .menu-label {
+    color: #748198;
     font-size: 10px;
-    color: #8494ae;
-    letter-spacing: 2px;
-    margin: 28px 12px 12px;
+    font-weight: 700;
+    letter-spacing: 1.7px;
+    padding: 0 12px;
+    margin: 15px 0 10px;
 }
 
-.menu a {
-    display: block;
-    text-decoration: none;
-    color: #c4cede;
-    padding: 12px 14px;
-    border-radius: 8px;
+.nav-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 12px 13px;
+    border-radius: 9px;
+    background: transparent;
+    color: #aeb9ca;
+    text-align: left;
     font-size: 13px;
     margin-bottom: 5px;
     transition: .2s;
 }
 
-.menu a:hover,
-.menu a.active {
-    background: var(--navy-light);
+.nav-item:hover {
     color: white;
-    border-left: 3px solid var(--orange);
+    background: rgba(255,255,255,.07);
 }
 
-.menu a span {
-    margin-right: 10px;
+.nav-item.active {
+    color: white;
+    background: var(--orange);
+    box-shadow: 0 5px 18px rgba(244,119,33,.2);
+}
+
+.nav-icon {
+    width: 20px;
+    text-align: center;
+    font-size: 17px;
+}
+
+.sidebar-bottom {
+    padding: 18px;
+    border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.admin-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--orange);
+    color: white;
+    font-weight: 800;
+}
+
+.profile-name {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.profile-role {
+    color: #8794a8;
+    font-size: 10px;
+    margin-top: 4px;
 }
 
 /* MAIN */
 
 .main {
-    margin-left: 255px;
-    padding: 30px;
+    margin-left: 260px;
+    width: calc(100% - 260px);
+    min-width: 0;
 }
 
 .topbar {
+    height: 76px;
+    background: white;
+    border-bottom: 1px solid var(--border);
+    padding: 0 35px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 32px;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+.topbar-left {
+    display: flex;
+    align-items: center;
     gap: 15px;
 }
 
-.topbar h1 {
-    font-size: 25px;
+.page-title {
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.page-subtitle {
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 4px;
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: #eaf8f2;
+    color: #16855f;
+    padding: 9px 13px;
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+    background: #22a477;
+    border-radius: 50%;
+}
+
+.view-site {
+    background: var(--navy);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.view-site:hover {
+    background: var(--orange);
+}
+
+.mobile-menu {
+    display: none;
+    background: transparent;
+    font-size: 23px;
     color: var(--navy);
 }
 
-.topbar p {
-    color: var(--muted);
-    font-size: 13px;
-    margin-top: 7px;
-}
-
-.admin-profile {
-    background: white;
-    padding: 11px 16px;
-    border-radius: 10px;
-    font-size: 13px;
-    border: 1px solid var(--border);
+.content {
+    padding: 32px 35px 50px;
+    max-width: 1500px;
+    margin: auto;
 }
 
 /* WELCOME */
 
 .welcome {
-    background: linear-gradient(120deg, #101d35, #243c60);
+    background: linear-gradient(115deg, #101827 0%, #1b2c45 70%, #263c58 100%);
+    border-radius: 17px;
+    padding: 35px;
     color: white;
-    padding: 30px;
-    border-radius: 14px;
     position: relative;
     overflow: hidden;
     margin-bottom: 28px;
 }
 
-.welcome:after {
+.welcome::after {
     content: "";
     position: absolute;
-    width: 220px;
-    height: 220px;
+    width: 340px;
+    height: 500px;
+    right: 8%;
+    top: -180px;
     background: var(--orange);
-    opacity: .12;
+    opacity: .13;
     transform: rotate(35deg);
-    right: -55px;
-    top: -80px;
 }
 
-.welcome h2 {
-    font-size: 23px;
-    margin-bottom: 10px;
+.welcome::before {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 500px;
+    right: 22%;
+    top: -170px;
+    background: white;
+    opacity: .035;
+    transform: rotate(35deg);
+}
+
+.welcome-content {
+    position: relative;
+    z-index: 2;
+    max-width: 650px;
+}
+
+.welcome-tag {
+    color: var(--orange-light);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 13px;
+}
+
+.welcome h1 {
+    font-size: clamp(25px, 3vw, 34px);
+    line-height: 1.2;
+    margin-bottom: 12px;
 }
 
 .welcome p {
+    color: #b8c3d2;
     font-size: 13px;
-    color: #d0d9e7;
-    line-height: 1.7;
-    max-width: 600px;
+    line-height: 1.8;
+    max-width: 570px;
+}
+
+.welcome-button {
+    display: inline-block;
+    margin-top: 22px;
+    background: var(--orange);
+    color: white;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 12px 19px;
+    border-radius: 7px;
 }
 
 /* SECTION */
 
-.section-title {
-    font-size: 17px;
-    color: var(--navy);
-    margin-bottom: 16px;
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px 0 16px;
 }
 
-.stats {
+.section-heading h2 {
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.section-heading p {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 5px;
+}
+
+/* STATS */
+
+.stats-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-    margin-bottom: 32px;
+    gap: 17px;
 }
 
 .stat-card {
     background: white;
-    padding: 22px;
-    border-radius: 12px;
     border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 0;
 }
 
-.stat-card .icon {
-    font-size: 23px;
-    margin-bottom: 15px;
-}
-
-.stat-card h3 {
-    font-size: 14px;
-    margin-bottom: 8px;
-}
-
-.stat-card p {
-    font-size: 12px;
+.stat-label {
     color: var(--muted);
-    line-height: 1.6;
+    font-size: 11px;
+    font-weight: 600;
 }
 
-/* MANAGEMENT GRID */
+.stat-number {
+    font-size: 27px;
+    font-weight: 800;
+    margin-top: 9px;
+}
+
+.stat-note {
+    color: #9aa3b2;
+    font-size: 10px;
+    margin-top: 5px;
+}
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 13px;
+    display: grid;
+    place-items: center;
+    font-size: 21px;
+}
+
+.icon-orange {
+    background: #fff0e5;
+    color: var(--orange);
+}
+
+.icon-blue {
+    background: #eaf1ff;
+    color: #4778d8;
+}
+
+.icon-green {
+    background: #e7f8f1;
+    color: var(--green);
+}
+
+/* MANAGEMENT */
 
 .management-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-    margin-bottom: 32px;
+    gap: 17px;
 }
 
-.module {
+.manage-card {
     background: white;
-    padding: 22px;
-    border-radius: 12px;
     border: 1px solid var(--border);
-    transition: .2s;
+    border-radius: var(--radius);
+    padding: 22px;
+    text-align: left;
+    transition: .25s;
+    min-height: 155px;
+    position: relative;
+    overflow: hidden;
 }
 
-.module:hover {
-    transform: translateY(-3px);
-    border-color: var(--orange);
-    box-shadow: 0 8px 25px rgba(16,29,53,.06);
+.manage-card:hover {
+    transform: translateY(-4px);
+    border-color: #f7b17f;
+    box-shadow: 0 10px 28px rgba(20,35,55,.07);
 }
 
-.module .icon {
-    width: 43px;
-    height: 43px;
-    background: #fff3e6;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    font-size: 21px;
-    margin-bottom: 15px;
+.manage-icon {
+    width: 42px;
+    height: 42px;
+    background: #fff0e5;
+    color: var(--orange);
+    border-radius: 11px;
+    display: grid;
+    place-items: center;
+    font-size: 19px;
+    margin-bottom: 16px;
 }
 
-.module h3 {
-    font-size: 14px;
-    margin-bottom: 8px;
+.manage-card h3 {
+    font-size: 13px;
+    font-weight: 800;
+    margin-bottom: 7px;
 }
 
-.module p {
-    font-size: 12px;
-    line-height: 1.6;
+.manage-card p {
+    font-size: 10px;
+    line-height: 1.7;
     color: var(--muted);
 }
 
-.status {
+.manage-arrow {
+    position: absolute;
+    right: 20px;
+    top: 22px;
+    color: #aab2bf;
+    font-size: 16px;
+}
+
+/* INFO */
+
+.info-panel {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 23px;
+    margin-top: 28px;
+}
+
+.info-panel h3 {
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f1f4;
+    gap: 15px;
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    color: #7f8999;
+    font-size: 11px;
+}
+
+.info-value {
+    font-size: 11px;
+    font-weight: 700;
+    text-align: right;
+}
+
+.badge {
     display: inline-block;
-    font-size: 10px;
-    color: #a66b1e;
-    background: #fff3df;
+    background: #fff1e6;
+    color: #d96819;
     padding: 5px 9px;
     border-radius: 20px;
-    margin-top: 14px;
+    font-size: 9px;
+    font-weight: 800;
+}
+
+/* PAGE PLACEHOLDER */
+
+.module-page {
+    display: none;
+}
+
+.module-page.show {
+    display: block;
+}
+
+.dashboard-page.hide {
+    display: none;
+}
+
+.module-box {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 35px;
+    min-height: 250px;
+}
+
+.module-box h2 {
+    font-size: 21px;
+    margin-bottom: 12px;
+}
+
+.module-box p {
+    color: #7f8999;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.module-message {
+    margin-top: 25px;
+    background: #fff6ef;
+    border-left: 4px solid var(--orange);
+    padding: 17px;
+    color: #9a592c;
+    font-size: 12px;
+    line-height: 1.8;
 }
 
 /* FOOTER */
 
 .footer {
-    border-top: 1px solid var(--border);
-    padding-top: 20px;
-    color: var(--muted);
-    font-size: 11px;
-    line-height: 1.8;
+    padding: 25px 0 5px;
+    color: #9aa3b2;
+    font-size: 10px;
+    text-align: center;
 }
 
 /* RESPONSIVE */
 
-@media(max-width: 1000px) {
+@media (max-width: 1050px) {
+    .stats-grid,
     .management-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-@media(max-width: 700px) {
+@media (max-width: 760px) {
     .sidebar {
-        position: relative;
-        width: 100%;
-        height: auto;
+        transform: translateX(-100%);
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
     }
 
     .main {
         margin-left: 0;
-        padding: 20px;
-    }
-
-    .stats,
-    .management-grid {
-        grid-template-columns: 1fr;
+        width: 100%;
     }
 
     .topbar {
-        align-items: flex-start;
-        flex-direction: column;
+        padding: 0 18px;
+        height: 68px;
+    }
+
+    .mobile-menu {
+        display: block;
+    }
+
+    .topbar-right .status {
+        display: none;
+    }
+
+    .content {
+        padding: 22px 17px 35px;
+    }
+
+    .welcome {
+        padding: 27px 23px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .management-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 11px;
+    }
+
+    .manage-card {
+        padding: 17px;
+        min-height: 155px;
+    }
+
+    .manage-card h3 {
+        font-size: 12px;
+    }
+
+    .manage-card p {
+        font-size: 10px;
+    }
+
+    .view-site {
+        padding: 9px 11px;
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 390px) {
+    .management-grid {
+        grid-template-columns: 1fr;
     }
 }
 </style>
@@ -300,197 +662,478 @@ body {
 
 <body>
 
-<!-- SIDEBAR -->
+<div class="app">
 
-<aside class="sidebar">
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
 
-    <div class="brand">
-        <h2>JGS<span>.</span></h2>
-        <p>GLOBAL SERVICES</p>
-    </div>
-
-    <div class="menu-label">MAIN MENU</div>
-
-    <nav class="menu">
-        <a href="#" class="active"><span>▦</span> Dashboard</a>
-    </nav>
-
-    <div class="menu-label">WEBSITE MANAGEMENT</div>
-
-    <nav class="menu">
-        <a href="#pages"><span>▤</span> Page Manager</a>
-        <a href="#services"><span>◈</span> Services Manager</a>
-        <a href="#business"><span>▧</span> Business Focus</a>
-        <a href="#clients"><span>♙</span> Clients Manager</a>
-        <a href="#media"><span>▣</span> Media Library</a>
-        <a href="#news"><span>▤</span> News & Activities</a>
-    </nav>
-
-    <div class="menu-label">SYSTEM SETTINGS</div>
-
-    <nav class="menu">
-        <a href="#design"><span>◉</span> Design Manager</a>
-        <a href="#language"><span>文</span> Language Manager</a>
-        <a href="#seo"><span>⌕</span> SEO Settings</a>
-        <a href="#settings"><span>⚙</span> General Settings</a>
-    </nav>
-
-    <div class="menu-label">WEBSITE</div>
-
-    <nav class="menu">
-        <a href="../index.html" target="_blank">
-            <span>↗</span> View Public Website
-        </a>
-    </nav>
-
-</aside>
-
-
-<!-- MAIN CONTENT -->
-
-<main class="main">
-
-    <header class="topbar">
-        <div>
-            <h1>Admin Dashboard</h1>
-            <p>Jagaraya Global Services — Website Management System</p>
+        <div class="brand">
+            <div class="brand-icon">J</div>
+            <div>
+                <div class="brand-name">JAGARAYA</div>
+                <div class="brand-sub">GLOBAL SERVICES</div>
+            </div>
         </div>
 
-        <div class="admin-profile">
-            ⚙ Administrator
-        </div>
-    </header>
+        <div class="sidebar-content">
 
+            <div class="menu-label">MAIN MENU</div>
 
-    <section class="welcome">
-        <h2>Welcome to JGS Website Manager</h2>
-        <p>
-            Kelola konten website Jagaraya Global Services melalui
-            satu pusat pengelolaan. Nantinya kamu dapat mengatur
-            halaman, layanan, gambar, berita, identitas perusahaan,
-            dan berbagai pengaturan website dari dashboard ini.
-        </p>
-    </section>
+            <button class="nav-item active" data-page="dashboard">
+                <span class="nav-icon">▦</span>
+                Dashboard
+            </button>
 
+            <button class="nav-item" data-page="pages">
+                <span class="nav-icon">▤</span>
+                Page Manager
+            </button>
 
-    <h2 class="section-title">Website Overview</h2>
+            <div class="menu-label">WEBSITE CONTENT</div>
 
-    <section class="stats">
+            <button class="nav-item" data-page="services">
+                <span class="nav-icon">◇</span>
+                Services Manager
+            </button>
 
-        <div class="stat-card">
-            <div class="icon">🌐</div>
-            <h3>Public Website</h3>
-            <p>Website utama JGS yang sudah online.</p>
-        </div>
+            <button class="nav-item" data-page="business">
+                <span class="nav-icon">▧</span>
+                Business Focus
+            </button>
 
-        <div class="stat-card">
-            <div class="icon">📄</div>
-            <h3>Website Pages</h3>
-            <p>Home, About, Services, Business Focus, Clients, Contact.</p>
-        </div>
+            <button class="nav-item" data-page="clients">
+                <span class="nav-icon">♧</span>
+                Clients Manager
+            </button>
 
-        <div class="stat-card">
-            <div class="icon">🛠️</div>
-            <h3>Management System</h3>
-            <p>Dashboard awal sedang dalam tahap pengembangan.</p>
-        </div>
+            <button class="nav-item" data-page="media">
+                <span class="nav-icon">▣</span>
+                Media Library
+            </button>
 
-    </section>
+            <button class="nav-item" data-page="news">
+                <span class="nav-icon">▥</span>
+                News & Activities
+            </button>
 
+            <div class="menu-label">CUSTOMIZATION</div>
 
-    <h2 class="section-title">Content Management</h2>
+            <button class="nav-item" data-page="design">
+                <span class="nav-icon">◈</span>
+                Design Manager
+            </button>
 
-    <section class="management-grid">
+            <button class="nav-item" data-page="language">
+                <span class="nav-icon">文</span>
+                Language Manager
+            </button>
 
-        <div class="module" id="pages">
-            <div class="icon">📄</div>
-            <h3>Page Manager</h3>
-            <p>Mengelola judul, teks, banner, dan konten seluruh halaman website.</p>
-            <span class="status">Coming Soon</span>
-        </div>
+            <button class="nav-item" data-page="seo">
+                <span class="nav-icon">⌕</span>
+                SEO Settings
+            </button>
 
-        <div class="module" id="services">
-            <div class="icon">⚙️</div>
-            <h3>Services Manager</h3>
-            <p>Mengelola informasi delapan layanan utama JGS.</p>
-            <span class="status">Coming Soon</span>
-        </div>
+            <div class="menu-label">SYSTEM</div>
 
-        <div class="module" id="business">
-            <div class="icon">🏢</div>
-            <h3>Business Focus</h3>
-            <p>Mengelola sembilan sektor bisnis fokus perusahaan.</p>
-            <span class="status">Coming Soon</span>
-        </div>
+            <button class="nav-item" data-page="settings">
+                <span class="nav-icon">⚙</span>
+                General Settings
+            </button>
 
-        <div class="module" id="clients">
-            <div class="icon">🤝</div>
-            <h3>Clients Manager</h3>
-            <p>Mengelola daftar klien, logo, dan informasi kerja sama.</p>
-            <span class="status">Coming Soon</span>
         </div>
 
-        <div class="module" id="media">
-            <div class="icon">🖼️</div>
-            <h3>Media Library</h3>
-            <p>Pusat pengelolaan foto, video, logo, dan dokumen perusahaan.</p>
-            <span class="status">Coming Soon</span>
+        <div class="sidebar-bottom">
+            <div class="admin-profile">
+                <div class="avatar">A</div>
+                <div>
+                    <div class="profile-name">Website Administrator</div>
+                    <div class="profile-role">JGS MANAGEMENT PANEL</div>
+                </div>
+            </div>
         </div>
 
-        <div class="module" id="news">
-            <div class="icon">📰</div>
-            <h3>News & Activities</h3>
-            <p>Membuat dan mengelola berita serta aktivitas terbaru JGS.</p>
-            <span class="status">Coming Soon</span>
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+                <button class="mobile-menu" id="mobileMenu">☰</button>
+
+                <div>
+                    <div class="page-title" id="topTitle">Dashboard</div>
+                    <div class="page-subtitle">Jagaraya Global Services Management System</div>
+                </div>
+            </div>
+
+            <div class="topbar-right">
+                <div class="status">
+                    <span class="status-dot"></span>
+                    Website Online
+                </div>
+
+                <a class="view-site"
+                   href="https://jgs-website.pages.dev/"
+                   target="_blank">
+                    ↗ View Website
+                </a>
+            </div>
+
+        </header>
+
+
+        <div class="content">
+
+            <!-- DASHBOARD -->
+            <section class="dashboard-page" id="page-dashboard">
+
+                <div class="welcome">
+                    <div class="welcome-content">
+
+                        <div class="welcome-tag">
+                            JAGARAYA GLOBAL SERVICES
+                        </div>
+
+                        <h1>Welcome to<br>JGS Admin Dashboard.</h1>
+
+                        <p>
+                            Manage your corporate website, company information,
+                            services, media, news, and digital presence
+                            through one centralized management platform.
+                        </p>
+
+                        <a href="https://jgs-website.pages.dev/"
+                           target="_blank"
+                           class="welcome-button">
+                            VISIT PUBLIC WEBSITE ↗
+                        </a>
+
+                    </div>
+                </div>
+
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Website Overview</h2>
+                        <p>Ringkasan sistem pengelolaan website JGS.</p>
+                    </div>
+                </div>
+
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+                        <div>
+                            <div class="stat-label">Website Status</div>
+                            <div class="stat-number" style="font-size:21px">Online</div>
+                            <div class="stat-note">Public website available</div>
+                        </div>
+                        <div class="stat-icon icon-green">↗</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div>
+                            <div class="stat-label">Company Services</div>
+                            <div class="stat-number">08</div>
+                            <div class="stat-note">Service categories</div>
+                        </div>
+                        <div class="stat-icon icon-orange">◇</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div>
+                            <div class="stat-label">Business Sectors</div>
+                            <div class="stat-number">09</div>
+                            <div class="stat-note">Business focus categories</div>
+                        </div>
+                        <div class="stat-icon icon-blue">▧</div>
+                    </div>
+
+                </div>
+
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Website Management</h2>
+                        <p>Pilih bagian website yang ingin kamu kelola.</p>
+                    </div>
+                </div>
+
+
+                <div class="management-grid">
+
+                    <button class="manage-card" data-open="pages">
+                        <span class="manage-arrow">↗</span>
+                        <div class="manage-icon">▤</div>
+                        <h3>Page Manager</h3>
+                        <p>Kelola halaman Home, About Us, Services, Clients, dan Contact.</p>
+                    </button>
+
+                    <button class="manage-card" data-open="services">
+                        <span class="manage-arrow">↗</span>
+                        <div class="manage-icon">◇</div>
+                        <h3>Services Manager</h3>
+                        <p>Kelola informasi dan deskripsi layanan perusahaan.</p>
+                    </button>
+
+                    <button class="manage-card" data-open="business">
+                        <span class="manage-arrow">↗</span>
+                        <div class="manage-icon">▧</div>
+                        <h3>Business Focus</h3>
+                        <p>Kelola sektor industri dan bidang bisnis JGS.</p>
+                    </button>
+
+                    <button class="manage-card" data-open="clients">
+                        <span class="manage-arrow">↗</span>
+                        <div class="manage-icon">♧</div>
+                        <h3>Clients Manager</h3>
+                        <p>Kelola informasi dan logo klien perusahaan.</p>
+                    </button>
+
+                    <button class="manage-card" data-open="media">
+                        <span class="manage-arrow">↗</span>
+                        <div class="manage-icon">▣</div>
+                        <h3>Media Library</h3>
+                        <p>Kelola foto, video, logo, dan dokumen website.</p>
+                    </button>
+
+                    <button class="manage-card" data-open="news">
+                        <span class="manage-arrow">↗</span>
+                        <div class="manage-icon">▥</div>
+                        <h3>News & Activities</h3>
+                        <p>Kelola berita, artikel, dan aktivitas perusahaan.</p>
+                    </button>
+
+                    <button class="manage-card" data-open="design">
+                        <span class="manage-arrow">↗</span>
+                        <div class="manage-icon">◈</div>
+                        <h3>Design Manager</h3>
+                        <p>Atur warna, tampilan, identitas, dan elemen visual.</p>
+                    </button>
+
+                    <button class="manage-card" data-open="language">
+                        <span class="manage-arrow">↗</span>
+                        <div class="manage-icon">文</div>
+                        <h3>Language Manager</h3>
+                        <p>Kelola konten bahasa Indonesia dan Inggris.</p>
+                    </button>
+
+                    <button class="manage-card" data-open="seo">
+                        <span class="manage-arrow">↗</span>
+                        <div class="manage-icon">⌕</div>
+                        <h3>SEO Settings</h3>
+                        <p>Kelola judul halaman dan informasi pencarian Google.</p>
+                    </button>
+
+                </div>
+
+
+                <div class="info-panel">
+                    <h3>Company Information</h3>
+
+                    <div class="info-row">
+                        <span class="info-label">Company Name</span>
+                        <span class="info-value">Jagaraya Global Services</span>
+                    </div>
+
+                    <div class="info-row">
+                        <span class="info-label">Company Tagline</span>
+                        <span class="info-value">Facility Service Solution</span>
+                    </div>
+
+                    <div class="info-row">
+                        <span class="info-label">Head Office</span>
+                        <span class="info-value">East Jakarta, Indonesia</span>
+                    </div>
+
+                    <div class="info-row">
+                        <span class="info-label">Website Status</span>
+                        <span class="badge">ONLINE</span>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- MODULE PAGES -->
+            <section class="module-page" id="modulePage">
+
+                <div class="module-box">
+                    <h2 id="moduleTitle">Page Manager</h2>
+
+                    <p id="moduleDescription">
+                        Manage your website content.
+                    </p>
+
+                    <div class="module-message">
+                        <strong>Management module belum diaktifkan.</strong><br>
+                        Bagian ini merupakan tempat untuk fitur pengelolaan
+                        website berikutnya. Nantinya, kamu dapat mengedit
+                        konten dan mengunggah media melalui dashboard ini
+                        tanpa harus mengubah kode HTML secara manual.
+                    </div>
+                </div>
+
+            </section>
+
+
+            <div class="footer">
+                © 2026 JAGARAYA GLOBAL SERVICES · ADMIN MANAGEMENT SYSTEM
+            </div>
+
         </div>
 
-    </section>
+    </main>
+
+</div>
 
 
-    <h2 class="section-title">System Configuration</h2>
+<script>
+const sidebar = document.getElementById("sidebar");
+const mobileMenu = document.getElementById("mobileMenu");
+const navItems = document.querySelectorAll(".nav-item");
+const manageCards = document.querySelectorAll("[data-open]");
 
-    <section class="management-grid">
+const dashboardPage = document.querySelector(".dashboard-page");
+const modulePage = document.getElementById("modulePage");
 
-        <div class="module" id="design">
-            <div class="icon">🎨</div>
-            <h3>Design Manager</h3>
-            <p>Mengatur warna, tipografi, tampilan, dan identitas visual website.</p>
-            <span class="status">Coming Soon</span>
-        </div>
-
-        <div class="module" id="language">
-            <div class="icon">🌏</div>
-            <h3>Language Manager</h3>
-            <p>Mempersiapkan pengelolaan konten Bahasa Indonesia dan Inggris.</p>
-            <span class="status">Coming Soon</span>
-        </div>
-
-        <div class="module" id="seo">
-            <div class="icon">🔎</div>
-            <h3>SEO Settings</h3>
-            <p>Mengelola judul halaman, deskripsi, dan pengaturan pencarian.</p>
-            <span class="status">Coming Soon</span>
-        </div>
-
-        <div class="module" id="settings">
-            <div class="icon">🔧</div>
-            <h3>General Settings</h3>
-            <p>Mengelola informasi perusahaan dan konfigurasi website.</p>
-            <span class="status">Coming Soon</span>
-        </div>
-
-    </section>
+const topTitle = document.getElementById("topTitle");
+const moduleTitle = document.getElementById("moduleTitle");
+const moduleDescription = document.getElementById("moduleDescription");
 
 
-    <footer class="footer">
-        <strong>JAGARAYA GLOBAL SERVICES</strong><br>
-        Facility Service Solution<br>
-        JGS Website Management System
-        <br><br>
-        © 2026 Jagaraya Global Services. All Rights Reserved.
-    </footer>
+const modules = {
+    dashboard: {
+        title: "Dashboard",
+        description: "JGS Website Management Overview"
+    },
 
-</main>
+    pages: {
+        title: "Page Manager",
+        description: "Manage Home, About Us, Services, Clients, and Contact pages."
+    },
+
+    services: {
+        title: "Services Manager",
+        description: "Manage all JGS company service categories and descriptions."
+    },
+
+    business: {
+        title: "Business Focus",
+        description: "Manage business sectors and industry categories."
+    },
+
+    clients: {
+        title: "Clients Manager",
+        description: "Manage company client information and logos."
+    },
+
+    media: {
+        title: "Media Library",
+        description: "Manage images, videos, logos, and documents."
+    },
+
+    news: {
+        title: "News & Activities",
+        description: "Manage company news, articles, and activities."
+    },
+
+    design: {
+        title: "Design Manager",
+        description: "Manage website colors, visual identity, and design settings."
+    },
+
+    language: {
+        title: "Language Manager",
+        description: "Manage Indonesian and English website content."
+    },
+
+    seo: {
+        title: "SEO Settings",
+        description: "Manage website search engine optimization settings."
+    },
+
+    settings: {
+        title: "General Settings",
+        description: "Manage general website configuration."
+    }
+};
+
+
+function openModule(page) {
+
+    const module = modules[page];
+
+    if (!module) return;
+
+    topTitle.textContent = module.title;
+
+    navItems.forEach(item => {
+        item.classList.toggle(
+            "active",
+            item.dataset.page === page
+        );
+    });
+
+    if (page === "dashboard") {
+
+        dashboardPage.classList.remove("hide");
+        modulePage.classList.remove("show");
+
+    } else {
+
+        dashboardPage.classList.add("hide");
+        modulePage.classList.add("show");
+
+        moduleTitle.textContent = module.title;
+        moduleDescription.textContent = module.description;
+
+    }
+
+    sidebar.classList.remove("open");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+navItems.forEach(item => {
+    item.addEventListener("click", () => {
+        openModule(item.dataset.page);
+    });
+});
+
+
+manageCards.forEach(card => {
+    card.addEventListener("click", () => {
+        openModule(card.dataset.open);
+    });
+});
+
+
+mobileMenu.addEventListener("click", () => {
+    sidebar.classList.toggle("open");
+});
+
+
+document.addEventListener("click", event => {
+
+    if (
+        window.innerWidth <= 760 &&
+        !sidebar.contains(event.target) &&
+        !mobileMenu.contains(event.target)
+    ) {
+        sidebar.classList.remove("open");
+    }
+
+});
+</script>
 
 </body>
 </html>
