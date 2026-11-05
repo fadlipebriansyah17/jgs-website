@@ -74,3 +74,4 @@ git push -u origin main
 4. Admin Panel nanti berada di `/admin` dan memakai Functions, D1, dan R2 (struktur `functions/`, `migrations/`, `wrangler.toml` sudah disiapkan).
 
 Alternatif tanpa Git: `npx wrangler pages deploy public --project-name jgs-website`.
+<!-- Trigger Cloudflare Pages deployment -->
