@@ -173,6 +173,7 @@ def footer(root):
 <a class="wa-float" href="https://wa.me/%(wa)s" target="_blank" rel="noopener" aria-label="Chat WhatsApp JGS">%(chat)s</a>
 <script src="%(root)sassets/js/components.js"></script>
 <script src="%(root)sassets/js/main.js"></script>
+<script src="%(root)sassets/js/cms.js" defer></script>
 <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 </body>
 </html>
@@ -581,35 +582,20 @@ def page_contact():
 
 
 def page_admin():
-    root = "../"
-    feats = ["Teks &amp; gambar", "Halaman &amp; section", "Layanan", "Business Focus", "Klien &amp; portofolio", "Berita &amp; aktivitas", "Navigasi", "Warna, font &amp; desain", "Informasi kontak", "SEO", "Media Library"]
-    lis = "".join("<li>%s</li>" % f for f in feats)
     return "admin/index.html", """<!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Admin Panel | JGS</title>
-<link rel="icon" type="image/png" href="../assets/images/logo/favicon.png">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/tokens.css">
-<link rel="stylesheet" href="../assets/css/base.css">
-<link rel="stylesheet" href="../assets/css/components.css">
-<link rel="stylesheet" href="../assets/css/pages.css">
+<meta http-equiv="refresh" content="0; url=dashboard.html">
+<title>Admin JGS</title>
 </head>
-<body class="admin-body">
-<main class="admin-box">
-  %s
-  <h1>Admin Panel JGS</h1>
-  <p>Halaman ini adalah placeholder. Admin Panel akan dibangun pada tahap berikutnya dengan Cloudflare Pages Functions, D1, dan R2, dengan autentikasi yang aman.</p>
-  <p style="margin-bottom:0"><strong style="color:#fff">Rencana modul pengelolaan:</strong></p>
-  <ul class="admin-list">%s</ul>
-  <a class="btn btn--primary" href="../index.html">Kembali ke Website</a>
-</main>
+<body>
+<p><a href="dashboard.html">Buka Admin Dashboard JGS</a></p>
 </body>
 </html>
-""" % (img("logo/jgs-shield.png", "Logo JGS", root, loading="eager"), lis)
+"""
 
 
 def main():
