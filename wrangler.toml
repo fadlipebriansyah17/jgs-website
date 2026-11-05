@@ -1,13 +1,9 @@
+
 name = "jgs-website"
 compatibility_date = "2025-01-01"
 pages_build_output_dir = "public"
 
-# Aktifkan setelah resource dibuat di dashboard Cloudflare / via wrangler:
-# [[d1_databases]]
-# binding = "DB"
-# database_name = "jgs-db"
-# database_id = "ISI_DATABASE_ID"
-#
-# [[r2_buckets]]
-# binding = "MEDIA"
-# bucket_name = "jgs-media"
+[[d1_databases]]
+binding = "DB"
+database_name = "jgs-db"
+database_id = "da2d8b4b-4dc3-4099-b519-d1956660f396"
