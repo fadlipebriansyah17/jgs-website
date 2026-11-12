@@ -1,10 +1,8 @@
-// GET /api/admin/session — status login & kesiapan konfigurasi (dipakai layar login).
-import { isAuthenticated, passwordConfigured } from "../../_lib/auth.js";
-import { json, handle } from "../../_lib/http.js";
-
-export const onRequestGet = handle(async ({ env, request }) => {
-  return json({
-    authenticated: await isAuthenticated(env, request),
-    setup: { password: passwordConfigured(env), db: !!env.DB, media: !!env.MEDIA },
+// CMS lama (D1/R2) sudah DINONAKTIFKAN. Admin sekarang memakai Decap CMS di /admin/.
+// Kode lama diarsipkan di _legacy-custom-cms/ (tidak dijalankan). File ini sengaja tanpa impor.
+export function onRequest() {
+  return new Response(JSON.stringify({ ok: false, error: "CMS lama sudah dinonaktifkan. Gunakan /admin/." }), {
+    status: 410,
+    headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" },
   });
-});
+}

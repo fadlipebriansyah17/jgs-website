@@ -1,0 +1,40 @@
+{
+  "meta_description": "Portofolio dan area klien Jagaraya Global Services (JGS).",
+  "hero_title": "Klien Kami",
+  "hero_lead": "Portofolio klien Jagaraya Global Services.",
+  "section_eyebrow": "Area Klien",
+  "section_title": "Dipercaya oleh berbagai bidang usaha",
+  "clients": [
+    {
+      "name": "Mr. D.I.Y",
+      "img": "/assets/images/clients/mr-diy.png"
+    },
+    {
+      "name": "J&T Express",
+      "img": "/assets/images/clients/jnt-express.png"
+    },
+    {
+      "name": "ISTN",
+      "img": "/assets/images/clients/istn.png"
+    }
+  ],
+  "placeholders": 6,
+  "notice": "Logo di atas bersumber dari Company Profile JGS 2025 dan perlu dikonfirmasi izin tampilnya sebelum website dipublikasikan. Slot kosong adalah placeholder untuk klien lain; daftar klien akan dilengkapi setelah nama dan logo dikonfirmasi.",
+  "portfolio_eyebrow": "Portofolio",
+  "portfolio_title": "Studi kasus dan proyek",
+  "portfolio_lead": "Bagian ini disiapkan untuk menampilkan portofolio proyek setelah data dan izin tampil dari klien tersedia.",
+  "portfolio_items": [
+    {
+      "title": "Portofolio 1",
+      "text": "Placeholder: nama klien, layanan yang diberikan, dan periode kerja sama akan diisi setelah dikonfirmasi."
+    },
+    {
+      "title": "Portofolio 2",
+      "text": "Placeholder: nama klien, layanan yang diberikan, dan periode kerja sama akan diisi setelah dikonfirmasi."
+    },
+    {
+      "title": "Portofolio 3",
+      "text": "Placeholder: nama klien, layanan yang diberikan, dan periode kerja sama akan diisi setelah dikonfirmasi."
+    }
+  ]
+}

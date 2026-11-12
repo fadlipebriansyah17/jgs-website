@@ -1,0 +1,51 @@
+{
+  "meta_description": "Profil, visi, misi, karakter, value, tata nilai perusahaan, pendekatan Man-Money-Method-Materials, dan sistem ERP Jagaraya Global Services.",
+  "hero_lead": "Perusahaan penyedia sumber daya manusia berkualitas dan layanan alihdaya untuk berbagai sektor industri bisnis.",
+  "profile_eyebrow": "Profil Perusahaan",
+  "profile_title": "Jagaraya Global Services",
+  "about": [
+    "JAGARAYA GLOBAL SERVICES (JGS) adalah perusahaan yang berfokus pada penyediaan sumber daya manusia berkualitas tinggi, baik untuk dipekerjakan langsung oleh pelanggan maupun melalui sistem alihdaya, yang dilengkapi dengan keahlian, kompetensi, integritas, dan pengetahuan yang komprehensif dalam memenuhi kebutuhan seluruh klien kami yang berasal dari berbagai sektor industri bisnis.",
+    "JGS merupakan bagian dari Jagaraya Group, dengan pengembangan bisnis di berbagai bidang usaha yang terus berjalan dalam memperkuat bisnis group secara luas dengan skala nasional dan internasional."
+  ],
+  "belief": "Kami percaya bahwa kunci untuk memberikan pelayanan kelas utama adalah investasi pada sumber daya manusia. Oleh karena itu, kami memberikan kontribusi yang signifikan dalam hal perekrutan, pelatihan, dan pengembangan keterampilan, serta terus melakukan inovasi dalam pengembangan bakat dan profesionalisme setiap karyawan untuk mencapai tingkat motivasi terbaik, semuanya untuk mencapai kepuasan klien.",
+  "about_image": "/assets/images/general/guard-back.png",
+  "vmv_eyebrow": "Visi, Misi, Karakter & Value",
+  "vmv_title": "Arah dan nilai yang kami pegang",
+  "karakter": "Kami berkarakter profesional, berdedikasi, berkinerja tinggi, dan berintegritas dalam setiap layanan.",
+  "visi": "Menjadi perusahaan terbaik di bidang alihdaya dan mitra yang dapat diandalkan bagi seluruh klien kami di berbagai bidang industri.",
+  "misi": "Menyampaikan pelayanan kelas terbaik dengan dukungan tenaga kerja yang terampil dan profesional di setiap bidang sektor industri serta pendekatan yang terstruktur dalam menjalankan bisnis perusahaan.",
+  "value": "Profesional, dedikasi dan performa tinggi serta integritas bersama untuk mencapai tujuan kepuasan klien.",
+  "value_words": [
+    "Profesional",
+    "Dedikasi",
+    "Performa Tinggi",
+    "Integritas"
+  ],
+  "nilai_eyebrow": "Tata Nilai Perusahaan",
+  "nilai_title": "Man – Money – Method & Materials",
+  "tata_nilai": "Dengan manajemen yang solid dan kokoh, dukungan sumber daya manusia yang terdidik, terlatih dan profesional, kekuatan finansial, serta metode kerja yang tertata (Man – Money – Method & Materials), Jagaraya Global Services (JGS) dapat bersaing dalam industri facility service dan jasa keamanan di Indonesia.",
+  "four_m": [
+    {
+      "title": "Man",
+      "text": "Sumber daya manusia yang terdidik, terlatih, dan profesional.",
+      "icon": "users"
+    },
+    {
+      "title": "Money",
+      "text": "Kekuatan finansial yang mendukung keberlangsungan layanan.",
+      "icon": "chart"
+    },
+    {
+      "title": "Method",
+      "text": "Metode kerja yang tertata dan terstruktur.",
+      "icon": "doc"
+    },
+    {
+      "title": "Materials",
+      "text": "Dukungan peralatan dan perlengkapan sesuai kebutuhan layanan.",
+      "icon": "box"
+    }
+  ],
+  "erp_title": "Sistem ERP (Enterprise Resources Planning)",
+  "erp": "Sistem ERP (Enterprise Resources Planning) yang efisien dan efektif dalam pengelolaan operasional secara sistematis merupakan keunggulan kami, dengan tujuan meningkatkan kinerja manajemen dalam memberikan pelayanan terbaik bagi pengguna jasa."
+}

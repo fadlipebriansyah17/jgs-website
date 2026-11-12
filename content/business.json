@@ -1,0 +1,117 @@
+{
+  "meta_description": "Sektor yang dilayani JGS: office building, banks, industrial plant, logistic & retail, hospital, apartment, hotel, mall, dan school & campus.",
+  "hero_lead": "Sektor industri dan properti yang kami layani dengan sumber daya manusia profesional.",
+  "section_eyebrow": "Sembilan Sektor",
+  "section_title": "Bisnis fokus kami",
+  "section_lead": "Setiap sektor memiliki kebutuhan operasional yang berbeda. JGS menyesuaikan SOP dan tenaga kerja dengan lokasi tempat kami bekerja.",
+  "photo_note": "Area foto saat ini berupa placeholder dan mudah diganti dengan dokumentasi resmi (folder `assets/images/business-focus/`).",
+  "sectors": [
+    {
+      "name": "Office Building",
+      "desc": "Gedung perkantoran",
+      "icon": "building",
+      "img": ""
+    },
+    {
+      "name": "Banks",
+      "desc": "Perbankan",
+      "icon": "bank",
+      "img": ""
+    },
+    {
+      "name": "Industrial Plant",
+      "desc": "Pabrik dan kawasan industri",
+      "icon": "factory",
+      "img": ""
+    },
+    {
+      "name": "Logistic & Retail",
+      "desc": "Logistik dan ritel",
+      "icon": "box",
+      "img": ""
+    },
+    {
+      "name": "Hospital",
+      "desc": "Rumah sakit",
+      "icon": "hospital",
+      "img": ""
+    },
+    {
+      "name": "Apartment & Residences",
+      "desc": "Apartemen dan hunian",
+      "icon": "home",
+      "img": ""
+    },
+    {
+      "name": "Hotel, Café & Restaurant",
+      "desc": "Perhotelan, kafe, dan restoran",
+      "icon": "bed",
+      "img": ""
+    },
+    {
+      "name": "Mall & Marketplace",
+      "desc": "Pusat perbelanjaan dan pasar",
+      "icon": "bag",
+      "img": ""
+    },
+    {
+      "name": "School & Campus",
+      "desc": "Sekolah dan kampus",
+      "icon": "cap",
+      "img": ""
+    }
+  ],
+  "addvalue_eyebrow": "Additional Value",
+  "addvalue_title": "Nilai tambah JGS untuk klien",
+  "addvalue_lead": "Berlaku di seluruh sektor yang kami layani.",
+  "add_value_jgs": [
+    {
+      "title": "Business Process",
+      "icon": "layers"
+    },
+    {
+      "title": "Service Level Agreement (SLA)",
+      "icon": "doc"
+    },
+    {
+      "title": "Key Performance Indicator (KPI)",
+      "icon": "target"
+    }
+  ],
+  "add_value_ops": [
+    {
+      "title": "Operation Management",
+      "icon": "cog"
+    },
+    {
+      "title": "Administration",
+      "icon": "doc"
+    },
+    {
+      "title": "Knowledge Management",
+      "icon": "eye"
+    },
+    {
+      "title": "Reporting",
+      "icon": "chart"
+    },
+    {
+      "title": "Quality Management",
+      "icon": "check"
+    },
+    {
+      "title": "Resource Management",
+      "icon": "users"
+    },
+    {
+      "title": "Infrastructure",
+      "icon": "server"
+    }
+  ],
+  "key_benefit": [
+    "Metode andal kami berbasis Man, Money, Method & Materials.",
+    "Klien dapat mengalokasikan lebih banyak fokus pada bisnis inti perusahaan untuk mencapai target.",
+    "Pengalihan risiko kepada perusahaan alihdaya.",
+    "Pengendalian pelaksanaan layanan dapat dilakukan melalui SLA/KPI."
+  ]
+}

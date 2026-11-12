@@ -1,6 +1,6 @@
 # Website Resmi JAGARAYA GLOBAL SERVICES (JGS)
 
-Website statis (HTML5, CSS3, JavaScript) tanpa framework. Enam halaman publik sudah selesai; Admin Panel masih placeholder.
+Website statis (HTML5, CSS3, JavaScript) tanpa framework. Enam halaman publik sudah selesai. Konten diedit lewat **Admin Decap CMS** di `/admin/` (login GitHub, tanpa database, tanpa biaya bulanan); panduan di folder `docs/`.
 
 | Halaman | File |
 |---|---|
@@ -10,7 +10,8 @@ Website statis (HTML5, CSS3, JavaScript) tanpa framework. Enam halaman publik su
 | Business Focus | `public/business-focus.html` |
 | Our Clients | `public/clients.html` |
 | Contact Us | `public/contact.html` |
-| Admin (placeholder) | `public/admin/index.html` |
+| Admin (Decap CMS) | `public/admin/index.html` + `public/admin/config.yml` |
+| Berita & Aktivitas (otomatis, muncul setelah ada artikel) | `public/news.html`, `public/news/*.html` |
 
 ## Menjalankan di komputer
 
@@ -26,15 +27,23 @@ Membuka file HTML langsung (double-click) juga bisa, tetapi peta dan font Google
 
 ## Mengubah konten
 
-Seluruh teks ada di `tools/content_id.py`. Setelah diubah, jalankan:
+**Cara utama: Admin Decap** di `https://jgs-website.pages.dev/admin/` (aktivasi: `docs/PANDUAN-AKTIVASI.md`, pemakaian: `docs/PANDUAN-ADMIN.md`).
 
-```bash
-python3 tools/build.py      # menulis ulang semua file di public/*.html
-```
+Alur kerja: admin menyimpan → Decap membuat *commit* ke GitHub (`content/*.json`, foto di `public/assets/images/uploads/`) → Cloudflare Pages menjalankan `python3 tools/build.py` → halaman HTML diperbarui (1–2 menit).
 
-Warna, font, dan jarak ada di `public/assets/css/tokens.css`. Kontak (alamat, telepon, WhatsApp) ada di bagian `SITE` pada `content_id.py`.
+| Isi | File data |
+|---|---|
+| Info perusahaan, kontak, ajakan, footer | `content/site.json` |
+| Beranda / Tentang / Layanan / Fokus Bisnis / Klien / Kontak | `content/home.json`, `about.json`, `services.json`, `business.json`, `clients.json`, `contact.json` |
+| Berita | `content/news/*.json` (1 file = 1 artikel), pengaturan halaman: `content/news_page.json` |
 
-Mengganti foto: timpa file di `public/assets/images/<folder>/` dengan nama yang sama. Gambar saat ini diambil dari Company Profile JGS 2025 dan bersifat ilustrasi; sebagian berasal dari internet, sehingga sebaiknya diganti dokumentasi resmi sebelum publikasi.
+Mengedit manual tetap bisa: ubah file JSON lalu jalankan `python3 tools/build.py` (hanya butuh Python 3, tanpa pustaka tambahan). Jika ada file JSON yang salah, build berhenti dengan pesan jelas dan HTML yang ada tidak berubah.
+
+Warna, font, dan jarak ada di `public/assets/css/tokens.css`.
+
+Mengganti foto: lewat Admin (disarankan), atau timpa file di `public/assets/images/<folder>/`. Gambar saat ini diambil dari Company Profile JGS 2025 dan bersifat ilustrasi; sebagian berasal dari internet, sehingga sebaiknya diganti dokumentasi resmi sebelum publikasi.
+
+> Catatan: file `public/*.html` di repo adalah hasil build. Setelah admin mengubah konten, Cloudflare membangun ulang HTML saat deploy; salinan di repo baru diperbarui bila `python3 tools/build.py` dijalankan lalu di-commit.
 
 ## Catatan akurasi konten
 
@@ -46,11 +55,11 @@ Mengganti foto: timpa file di `public/assets/images/<folder>/` dengan nama yang 
 
 ## Bahasa Inggris (nanti)
 
-Salin `tools/content_id.py` menjadi `content_en.py`, terjemahkan nilainya, lalu daftarkan di `LANGS` pada `tools/build.py`. Teks UI JavaScript ada di `window.JGS.i18n` pada `assets/js/components.js`.
+Buat salinan folder `content/` untuk bahasa Inggris dan pemuat `content_en.py` (lihat `tools/content_id.py`), lalu daftarkan di `LANGS` pada `tools/build.py`. Teks UI JavaScript ada di `window.JGS.i18n` pada `assets/js/components.js`.
 
 ## Formulir kontak
 
-Formulir sudah memiliki validasi. Pengiriman belum aktif: pengunjung diarahkan melanjutkan lewat WhatsApp dengan pesan terisi otomatis. Untuk mengaktifkan: buat D1, jalankan `migrations/0001_init.sql`, pasang binding `DB` di `wrangler.toml`, buka komentar kode di `functions/api/contact.js`, lalu isi `contactEndpoint` di `components.js`.
+Formulir sudah memiliki validasi. Pengiriman belum aktif: pengunjung diarahkan melanjutkan lewat WhatsApp dengan pesan terisi otomatis. Untuk mengaktifkan nanti (butuh D1): buat D1, jalankan `migrations/0001_init.sql`, buat `wrangler.toml` dengan binding `DB` (contoh di `_legacy-custom-cms/wrangler.toml.original`), buka komentar kode di `functions/api/contact.js`, lalu isi `contactEndpoint` di `components.js`.
 
 # Upload ke GitHub
 
@@ -69,9 +78,8 @@ git push -u origin main
 # Deploy ke Cloudflare Pages
 
 1. Cloudflare Dashboard → **Workers & Pages** → **Create** → **Pages** → **Connect to Git**, pilih repo.
-2. Build command: kosongkan. **Build output directory: `public`**. Klik Deploy.
+2. **Build command: `python3 tools/build.py`**. **Build output directory: `public`**. Klik Deploy.
 3. Domain: **Custom domains** → tambahkan `www.jagaraya.id` dan ikuti instruksi DNS.
-4. Admin Panel nanti berada di `/admin` dan memakai Functions, D1, dan R2 (struktur `functions/`, `migrations/`, `wrangler.toml` sudah disiapkan).
+4. Admin berada di `/admin/` (Decap CMS). Login memakai GitHub OAuth lewat Pages Functions `functions/api/auth.js` dan `callback.js`; variabel `GITHUB_CLIENT_ID` dan `GITHUB_CLIENT_SECRET` diatur di Cloudflare (lihat `docs/PANDUAN-AKTIVASI.md`).
 
-Alternatif tanpa Git: `npx wrangler pages deploy public --project-name jgs-website`.
-<!-- Trigger Cloudflare Pages deployment -->
+CMS buatan sendiri sebelumnya (D1/R2) dinonaktifkan dan diarsipkan di `_legacy-custom-cms/`.

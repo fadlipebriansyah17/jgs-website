@@ -1,14 +1,8 @@
-// POST /api/admin/publish — salin draft menjadi konten yang tampil di website publik.
-import { requireAdmin } from "../../_lib/auth.js";
-import { DEFAULT_CONTENT, sanitizeContent } from "../../_lib/content.js";
-import { getDb, getDoc, putDoc } from "../../_lib/db.js";
-import { handle, json } from "../../_lib/http.js";
-
-export const onRequestPost = handle(async ({ env, request }) => {
-  await requireAdmin(env, request);
-  const db = await getDb(env);
-  const draft = await getDoc(db, "draft");
-  const clean = sanitizeContent(draft ? draft.content : DEFAULT_CONTENT);
-  const at = await putDoc(db, "published", clean);
-  return json({ ok: true, published_at: at });
-});
+// CMS lama (D1/R2) sudah DINONAKTIFKAN. Admin sekarang memakai Decap CMS di /admin/.
+// Kode lama diarsipkan di _legacy-custom-cms/ (tidak dijalankan). File ini sengaja tanpa impor.
+export function onRequest() {
+  return new Response(JSON.stringify({ ok: false, error: "CMS lama sudah dinonaktifkan. Gunakan /admin/." }), {
+    status: 410,
+    headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" },
+  });
+}

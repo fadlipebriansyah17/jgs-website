@@ -1,13 +1,33 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<meta http-equiv="refresh" content="0; url=dashboard.html">
 <title>Admin JGS</title>
+<link rel="icon" type="image/png" href="../assets/images/logo/favicon.png">
+<style>
+  #jgs-loading { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; max-width: 520px; margin: 18vh auto 0; padding: 0 20px; text-align: center; color: #102747; line-height: 1.7; }
+  #jgs-loading b { display: block; font-size: 1.25rem; margin-bottom: .4rem; }
+  #jgs-loading.err { color: #8a1c1c; }
+</style>
 </head>
 <body>
-<p><a href="dashboard.html">Buka Admin Dashboard JGS</a></p>
+<div id="jgs-loading"><b>Admin JGS</b>Memuat editor…</div>
+<noscript><p style="font-family:sans-serif;text-align:center;margin-top:20vh">Admin memerlukan JavaScript. Aktifkan JavaScript di browser Anda.</p></noscript>
+<script>
+  (function () {
+    var box = document.getElementById("jgs-loading");
+    new MutationObserver(function (_, obs) {
+      if (document.getElementById("nc-root")) { box.remove(); obs.disconnect(); }
+    }).observe(document.body, { childList: true });
+    window.__jgsCmsFailed = function () {
+      box.className = "err";
+      box.innerHTML = "<b>Editor tidak dapat dimuat</b>Periksa koneksi internet Anda lalu muat ulang halaman ini. Jika masih gagal, coba browser lain atau matikan pemblokir iklan untuk situs ini.";
+    };
+  })();
+</script>
+<!-- Decap CMS (resmi, gratis). Versi 3.x terbaru; untuk mengunci versi tertentu ganti ^3.0.0 dengan nomor versi persis. -->
+<script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js" onerror="window.__jgsCmsFailed()"></script>
 </body>
 </html>

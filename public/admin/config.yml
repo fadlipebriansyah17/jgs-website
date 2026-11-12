@@ -1,0 +1,499 @@
+# Konfigurasi Admin Decap CMS - Jagaraya Global Services (JGS)
+# Penyimpanan konten & foto: repository GitHub (commit ke branch main).
+# Login: GitHub OAuth lewat Pages Function di /api/auth dan /api/callback (lihat docs/PANDUAN-AKTIVASI.md).
+# File ini dihasilkan otomatis; kolom harus cocok dengan kunci di content/*.json.
+
+backend:
+  name: github
+  repo: fadlipebriansyah17/jgs-website
+  branch: main
+  base_url: https://jgs-website.pages.dev
+  auth_endpoint: api/auth
+  commit_messages:
+    create: 'Konten: tambah {{collection}} "{{slug}}"'
+    update: 'Konten: ubah {{collection}} "{{slug}}"'
+    delete: 'Konten: hapus {{collection}} "{{slug}}"'
+    uploadMedia: 'Media: unggah "{{path}}"'
+    deleteMedia: 'Media: hapus "{{path}}"'
+
+publish_mode: simple
+site_url: https://www.jagaraya.id
+display_url: https://www.jagaraya.id
+logo_url: https://jgs-website.pages.dev/assets/images/logo/jgs-shield.png
+
+media_folder: public/assets/images/uploads
+public_folder: /assets/images/uploads
+
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: "-"
+
+collections:
+  - name: beranda
+    label: "1. Beranda (Home)"
+    description: "Teks dan foto halaman utama."
+    files:
+      - name: home
+        label: "Halaman Beranda"
+        file: content/home.json
+        description: "Daftar layanan, sektor, dan klien di Beranda diatur di menu Layanan, Fokus Bisnis, dan Klien."
+        fields:
+          - label: "Deskripsi untuk Google (SEO)"
+            name: meta_description
+            widget: text
+            hint: "Ringkasan 1\u20132 kalimat yang muncul di hasil pencarian Google."
+          - {label: "Judul utama \u2014 bagian awal", name: hero_before, widget: string}
+          - {label: "Judul utama \u2014 kata yang disorot (huruf miring)", name: hero_em, widget: string}
+          - label: "Judul utama \u2014 bagian akhir"
+            name: hero_after
+            widget: string
+            hint: "Judul tampil: awal + kata sorot + akhir."
+          - label: "Kalimat pembuka di bawah judul"
+            name: hero_lead
+            widget: text
+          - label: "Foto petugas (kanan atas, besar)"
+            name: hero_person_1
+            widget: image
+            hint: "Klik untuk memilih/mengunggah foto (JPG/PNG/WEBP, disarankan di bawah 1 MB)."
+          - label: "Foto petugas (kanan, kecil)"
+            name: hero_person_2
+            widget: image
+            hint: "Klik untuk memilih/mengunggah foto (JPG/PNG/WEBP, disarankan di bawah 1 MB)."
+          - {label: "Profil singkat \u2014 label kecil", name: profile_eyebrow, widget: string}
+          - {label: "Profil singkat \u2014 judul", name: profile_title, widget: string}
+          - label: "Profil singkat \u2014 foto"
+            name: profile_image
+            widget: image
+            hint: "Klik untuk memilih/mengunggah foto (JPG/PNG/WEBP, disarankan di bawah 1 MB)."
+          - {label: "Bagian layanan \u2014 label kecil", name: services_eyebrow, widget: string}
+          - {label: "Bagian layanan \u2014 judul", name: services_title, widget: string}
+          - label: "Bagian layanan \u2014 kalimat pengantar"
+            name: services_lead
+            widget: text
+          - {label: "Bagian sektor \u2014 label kecil", name: sectors_eyebrow, widget: string}
+          - {label: "Bagian sektor \u2014 judul", name: sectors_title, widget: string}
+          - label: "Bagian sektor \u2014 kalimat pengantar"
+            name: sectors_lead
+            widget: text
+          - {label: "Keunggulan \u2014 label kecil", name: why_eyebrow, widget: string}
+          - {label: "Keunggulan \u2014 judul", name: why_title, widget: string}
+          - label: "Daftar keunggulan"
+            name: why_items
+            widget: list
+            summary: "{{fields.title}}"
+            label_singular: "keunggulan"
+            fields:
+              - {label: "Judul", name: title, widget: string}
+              - label: "Penjelasan"
+                name: text
+                widget: text
+              - label: "Ikon"
+                name: icon
+                widget: select
+                options: ["shield", "sparkle", "users", "parking", "bug", "camera", "truck", "leaf", "building", "bank", "factory", "box", "hospital", "home", "bed", "bag", "cap", "check", "phone", "pin", "chat", "arrow", "target", "eye", "flag", "heart", "layers", "chart", "doc", "cog", "server", "image", "plus"]
+                hint: "Gambar kecil yang tampil di samping judul."
+          - {label: "Nilai tambah \u2014 label kecil", name: addvalue_eyebrow, widget: string}
+          - {label: "Nilai tambah \u2014 judul", name: addvalue_title, widget: string}
+          - label: "Nilai tambah \u2014 kalimat pengantar"
+            name: addvalue_lead
+            widget: text
+          - {label: "Bagian klien \u2014 label kecil", name: clients_eyebrow, widget: string}
+          - {label: "Bagian klien \u2014 judul", name: clients_title, widget: string}
+          - label: "Bagian klien \u2014 kalimat pengantar"
+            name: clients_lead
+            widget: text
+          - {label: "Bagian kontak \u2014 label kecil", name: contact_eyebrow, widget: string}
+          - {label: "Bagian kontak \u2014 judul", name: contact_title, widget: string}
+  - name: tentang
+    label: "2. Tentang Kami"
+    description: "Profil, visi, misi, value, dan tata nilai."
+    files:
+      - name: about
+        label: "Halaman Tentang Kami"
+        file: content/about.json
+        fields:
+          - label: "Deskripsi untuk Google (SEO)"
+            name: meta_description
+            widget: text
+            hint: "Ringkasan 1\u20132 kalimat yang muncul di hasil pencarian Google."
+          - label: "Kalimat pembuka halaman"
+            name: hero_lead
+            widget: text
+          - {label: "Profil \u2014 label kecil", name: profile_eyebrow, widget: string}
+          - {label: "Profil \u2014 judul", name: profile_title, widget: string}
+          - label: "Paragraf profil perusahaan"
+            name: about
+            widget: list
+            field: {label: "Paragraf", name: item, widget: text}
+            hint: "Isi tepat 2 paragraf. Dipakai juga di Beranda."
+          - label: "Pernyataan keyakinan (huruf tebal)"
+            name: belief
+            widget: text
+          - label: "Foto di samping profil"
+            name: about_image
+            widget: image
+            hint: "Klik untuk memilih/mengunggah foto (JPG/PNG/WEBP, disarankan di bawah 1 MB)."
+          - {label: "Visi\u2013Misi \u2014 label kecil", name: vmv_eyebrow, widget: string}
+          - {label: "Visi\u2013Misi \u2014 judul", name: vmv_title, widget: string}
+          - label: "Karakter"
+            name: karakter
+            widget: text
+          - label: "Visi"
+            name: visi
+            widget: text
+          - label: "Misi"
+            name: misi
+            widget: text
+          - label: "Value"
+            name: value
+            widget: text
+          - label: "Kata kunci Value"
+            name: value_words
+            widget: list
+            field: {label: "Kata", name: item, widget: string}
+            hint: "Mis. Profesional, Dedikasi, Performa Tinggi, Integritas."
+          - {label: "Tata nilai \u2014 label kecil", name: nilai_eyebrow, widget: string}
+          - {label: "Tata nilai \u2014 judul", name: nilai_title, widget: string}
+          - label: "Tata nilai perusahaan"
+            name: tata_nilai
+            widget: text
+          - label: "Pendekatan 4M (Man, Money, Method, Materials)"
+            name: four_m
+            widget: list
+            summary: "{{fields.title}}"
+            label_singular: "item"
+            fields:
+              - {label: "Judul", name: title, widget: string}
+              - label: "Penjelasan"
+                name: text
+                widget: text
+              - label: "Ikon"
+                name: icon
+                widget: select
+                options: ["shield", "sparkle", "users", "parking", "bug", "camera", "truck", "leaf", "building", "bank", "factory", "box", "hospital", "home", "bed", "bag", "cap", "check", "phone", "pin", "chat", "arrow", "target", "eye", "flag", "heart", "layers", "chart", "doc", "cog", "server", "image", "plus"]
+                hint: "Gambar kecil yang tampil di samping judul."
+          - {label: "Judul bagian ERP", name: erp_title, widget: string}
+          - label: "Penjelasan sistem ERP"
+            name: erp
+            widget: text
+  - name: layanan
+    label: "3. Layanan (Services)"
+    description: "Tambah, ubah, urutkan layanan beserta foto."
+    files:
+      - name: services
+        label: "Daftar Layanan"
+        file: content/services.json
+        fields:
+          - label: "Deskripsi untuk Google (SEO)"
+            name: meta_description
+            widget: text
+            hint: "Ringkasan 1\u20132 kalimat yang muncul di hasil pencarian Google."
+          - {label: "Judul halaman", name: hero_title, widget: string}
+          - label: "Kalimat pembuka halaman"
+            name: hero_lead
+            widget: text
+          - label: "Layanan"
+            name: items
+            widget: list
+            summary: "{{fields.name}}"
+            label_singular: "layanan"
+            hint: "Urutan di sini = urutan di website."
+            fields:
+              - label: "Kode tautan (jangan diubah untuk layanan yang sudah ada)"
+                name: id
+                widget: string
+                hint: "Huruf kecil, angka, tanda minus. Dipakai untuk alamat halaman (mis. security). Wajib unik."
+                pattern: ["^[a-z0-9-]+$", "Hanya huruf kecil, angka, dan tanda minus"]
+              - {label: "Nama layanan", name: name, widget: string}
+              - label: "Ikon"
+                name: icon
+                widget: select
+                options: ["shield", "sparkle", "users", "parking", "bug", "camera", "truck", "leaf", "building", "bank", "factory", "box", "hospital", "home", "bed", "bag", "cap", "check", "phone", "pin", "chat", "arrow", "target", "eye", "flag", "heart", "layers", "chart", "doc", "cog", "server", "image", "plus"]
+                hint: "Gambar kecil yang tampil di samping judul."
+              - label: "Ringkasan (tampil di kartu Beranda)"
+                name: short
+                widget: text
+              - label: "Penjelasan lengkap (halaman Layanan)"
+                name: long
+                widget: list
+                field: {label: "Paragraf", name: item, widget: text}
+                hint: "Tambah satu item per paragraf."
+              - label: "Label kecil (opsional)"
+                name: chips
+                widget: list
+                field: {label: "Label", name: item, widget: string}
+                required: false
+                hint: "Mis. Alarm, CCTV, Access Control."
+              - label: "Foto utama"
+                name: img
+                widget: image
+                required: false
+                hint: "Klik untuk memilih/mengunggah foto (JPG/PNG/WEBP, disarankan di bawah 1 MB)."
+              - label: "Tampilan foto utama"
+                name: mode
+                widget: select
+                options: [{label: "Isi penuh (cover)", value: "cover"}, {label: "Potongan orang (cutout)", value: "cutout"}, {label: "Utuh dalam bingkai putih (contain)", value: "contain"}]
+                default: "cover"
+              - label: "Foto tambahan (opsional)"
+                name: extra_imgs
+                widget: list
+                field: {label: "Foto", name: item, widget: image}
+                required: false
+              - label: "Sub-layanan (opsional)"
+                name: subs
+                widget: list
+                summary: "{{fields.title}}"
+                label_singular: "sub-layanan"
+                required: false
+                fields:
+                  - {label: "Judul", name: title, widget: string}
+                  - label: "Penjelasan"
+                    name: text
+                    widget: text
+  - name: fokus
+    label: "4. Fokus Bisnis"
+    description: "Sektor yang dilayani dan nilai tambah."
+    files:
+      - name: business
+        label: "Halaman Fokus Bisnis"
+        file: content/business.json
+        description: "Daftar sektor dan nilai tambah juga tampil di Beranda."
+        fields:
+          - label: "Deskripsi untuk Google (SEO)"
+            name: meta_description
+            widget: text
+            hint: "Ringkasan 1\u20132 kalimat yang muncul di hasil pencarian Google."
+          - label: "Kalimat pembuka halaman"
+            name: hero_lead
+            widget: text
+          - {label: "Bagian sektor \u2014 label kecil", name: section_eyebrow, widget: string}
+          - {label: "Bagian sektor \u2014 judul", name: section_title, widget: string}
+          - label: "Bagian sektor \u2014 kalimat pengantar"
+            name: section_lead
+            widget: text
+          - label: "Catatan di bawah daftar sektor"
+            name: photo_note
+            widget: text
+            required: false
+            hint: "Kosongkan untuk menyembunyikan catatan ini. Tanda `\u2026` membuat teks bergaya kode."
+          - label: "Sektor yang dilayani"
+            name: sectors
+            widget: list
+            summary: "{{fields.name}}"
+            label_singular: "sektor"
+            fields:
+              - {label: "Nama sektor", name: name, widget: string}
+              - {label: "Deskripsi singkat", name: desc, widget: string}
+              - label: "Ikon"
+                name: icon
+                widget: select
+                options: ["shield", "sparkle", "users", "parking", "bug", "camera", "truck", "leaf", "building", "bank", "factory", "box", "hospital", "home", "bed", "bag", "cap", "check", "phone", "pin", "chat", "arrow", "target", "eye", "flag", "heart", "layers", "chart", "doc", "cog", "server", "image", "plus"]
+                hint: "Gambar kecil yang tampil di samping judul."
+              - label: "Foto sektor (opsional)"
+                name: img
+                widget: image
+                required: false
+                hint: "Jika kosong, tampil kotak \u201cFoto menyusul\u201d."
+          - {label: "Nilai tambah \u2014 label kecil", name: addvalue_eyebrow, widget: string}
+          - {label: "Nilai tambah \u2014 judul", name: addvalue_title, widget: string}
+          - label: "Nilai tambah \u2014 kalimat pengantar"
+            name: addvalue_lead
+            widget: text
+          - label: "Nilai tambah: dari sisi klien & kontrak"
+            name: add_value_jgs
+            widget: list
+            summary: "{{fields.title}}"
+            label_singular: "item"
+            fields:
+              - {label: "Judul", name: title, widget: string}
+              - label: "Ikon"
+                name: icon
+                widget: select
+                options: ["shield", "sparkle", "users", "parking", "bug", "camera", "truck", "leaf", "building", "bank", "factory", "box", "hospital", "home", "bed", "bag", "cap", "check", "phone", "pin", "chat", "arrow", "target", "eye", "flag", "heart", "layers", "chart", "doc", "cog", "server", "image", "plus"]
+                hint: "Gambar kecil yang tampil di samping judul."
+          - label: "Nilai tambah: dikelola oleh JGS"
+            name: add_value_ops
+            widget: list
+            summary: "{{fields.title}}"
+            label_singular: "item"
+            fields:
+              - {label: "Judul", name: title, widget: string}
+              - label: "Ikon"
+                name: icon
+                widget: select
+                options: ["shield", "sparkle", "users", "parking", "bug", "camera", "truck", "leaf", "building", "bank", "factory", "box", "hospital", "home", "bed", "bag", "cap", "check", "phone", "pin", "chat", "arrow", "target", "eye", "flag", "heart", "layers", "chart", "doc", "cog", "server", "image", "plus"]
+                hint: "Gambar kecil yang tampil di samping judul."
+          - label: "Key Benefit"
+            name: key_benefit
+            widget: list
+            field: {label: "Butir", name: item, widget: text}
+  - name: klien
+    label: "5. Klien"
+    description: "Nama dan logo klien."
+    files:
+      - name: clients
+        label: "Halaman Klien"
+        file: content/clients.json
+        fields:
+          - label: "Deskripsi untuk Google (SEO)"
+            name: meta_description
+            widget: text
+            hint: "Ringkasan 1\u20132 kalimat yang muncul di hasil pencarian Google."
+          - {label: "Judul halaman", name: hero_title, widget: string}
+          - label: "Kalimat pembuka halaman"
+            name: hero_lead
+            widget: text
+          - {label: "Bagian klien \u2014 label kecil", name: section_eyebrow, widget: string}
+          - {label: "Bagian klien \u2014 judul", name: section_title, widget: string}
+          - label: "Daftar klien"
+            name: clients
+            widget: list
+            summary: "{{fields.name}}"
+            label_singular: "klien"
+            fields:
+              - {label: "Nama klien", name: name, widget: string}
+              - label: "Logo klien"
+                name: img
+                widget: image
+                required: false
+                hint: "Pastikan Anda memiliki izin menampilkan logo klien."
+          - label: "Jumlah kotak kosong “Logo klien menyusul”"
+            name: placeholders
+            widget: number
+            value_type: int
+            min: 0
+            max: 12
+            hint: "Angka 0–12. Isi 0 untuk menyembunyikan."
+          - label: "Catatan di bawah logo"
+            name: notice
+            widget: text
+            required: false
+            hint: "Kosongkan untuk menyembunyikan catatan ini."
+          - {label: "Portofolio \u2014 label kecil", name: portfolio_eyebrow, widget: string}
+          - {label: "Portofolio \u2014 judul", name: portfolio_title, widget: string}
+          - label: "Portofolio \u2014 kalimat pengantar"
+            name: portfolio_lead
+            widget: text
+          - label: "Kotak portofolio"
+            name: portfolio_items
+            widget: list
+            summary: "{{fields.title}}"
+            label_singular: "kotak"
+            fields:
+              - {label: "Judul", name: title, widget: string}
+              - label: "Keterangan"
+                name: text
+                widget: text
+  - name: kontak
+    label: "6. Kontak & Info Perusahaan"
+    description: "Alamat, telepon, WhatsApp, dan teks halaman Kontak."
+    files:
+      - name: contact
+        label: "Halaman Kontak"
+        file: content/contact.json
+        fields:
+          - label: "Deskripsi untuk Google (SEO)"
+            name: meta_description
+            widget: text
+            hint: "Ringkasan 1\u20132 kalimat yang muncul di hasil pencarian Google."
+          - {label: "Judul halaman", name: hero_title, widget: string}
+          - label: "Kalimat pembuka halaman"
+            name: hero_lead
+            widget: text
+          - {label: "Judul kotak informasi kontak", name: info_title, widget: string}
+          - {label: "Judul formulir", name: form_title, widget: string}
+          - label: "Pemberitahuan di atas formulir"
+            name: form_notice
+            widget: text
+      - name: site
+        label: "Info Perusahaan & Kontak (dipakai di seluruh website)"
+        file: content/site.json
+        fields:
+          - {label: "Nama perusahaan", name: name, widget: string}
+          - {label: "Singkatan", name: short, widget: string}
+          - {label: "Slogan", name: tagline, widget: string}
+          - {label: "Alamat website (tanpa https://)", name: domain, widget: string}
+          - {label: "Alamat website lengkap (dengan https://)", name: url, widget: string}
+          - label: "Nomor telepon (tampilan)"
+            name: phone_display
+            widget: string
+            hint: "Mis. +62 816 111 6375"
+          - label: "Nomor telepon (untuk tombol telepon)"
+            name: phone_tel
+            widget: string
+            hint: "Tanpa spasi, mis. +628161116375"
+          - label: "Nomor WhatsApp (angka saja, awali 62)"
+            name: wa
+            widget: string
+            hint: "Mis. 628161116375"
+          - label: "Alamat kantor (satu baris per item)"
+            name: address_lines
+            widget: list
+            field: {label: "Baris", name: item, widget: string}
+            hint: "Baris pertama = judul (mis. Head Office); baris berikutnya = alamat."
+          - {label: "Kata kunci lokasi untuk Google Maps", name: map_query, widget: string}
+          - {label: "Ajakan di bagian bawah halaman \u2014 judul", name: cta_title, widget: string}
+          - label: "Ajakan di bagian bawah halaman \u2014 kalimat"
+            name: cta_text
+            widget: text
+          - label: "Deskripsi di footer"
+            name: footer_description
+            widget: text
+          - label: "Catatan kecil di footer"
+            name: footer_note
+            widget: text
+            required: false
+  - name: berita
+    label: "Berita & Aktivitas"
+    label_singular: "Berita"
+    description: "Tulis berita atau dokumentasi kegiatan. Menu “Berita” muncul otomatis di website setelah ada artikel."
+    folder: content/news
+    create: true
+    extension: json
+    format: json
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{date}} — {{title}}"
+    sortable_fields: ["date", "title"]
+    fields:
+      - {label: "Judul", name: title, widget: string}
+      - label: "Tanggal"
+        name: date
+        widget: datetime
+        date_format: "YYYY-MM-DD"
+        time_format: false
+        format: "YYYY-MM-DD"
+        picker_utc: false
+      - label: "Ringkasan (tampil di daftar berita)"
+        name: summary
+        widget: text
+        required: false
+      - label: "Foto sampul (opsional)"
+        name: image
+        widget: image
+        required: false
+        hint: "Klik untuk memilih/mengunggah foto (JPG/PNG/WEBP, disarankan di bawah 1 MB)."
+      - label: "Isi berita"
+        name: body
+        widget: text
+        hint: "Pisahkan paragraf dengan satu baris kosong. Teks biasa."
+      - {label: "Tampilkan di website", name: published, widget: boolean, default: true}
+  - name: halaman_berita
+    label: "8. Pengaturan Halaman Berita"
+    files:
+      - name: news_page
+        label: "Pengaturan Halaman Berita"
+        file: content/news_page.json
+        fields:
+          - label: "Nama menu"
+            name: nav_label
+            widget: string
+            hint: "Menu muncul otomatis setelah ada minimal 1 berita."
+          - label: "Deskripsi untuk Google (SEO)"
+            name: meta_description
+            widget: text
+            hint: "Ringkasan 1\u20132 kalimat yang muncul di hasil pencarian Google."
+          - {label: "Judul halaman", name: hero_title, widget: string}
+          - label: "Kalimat pembuka halaman"
+            name: hero_lead
+            widget: text

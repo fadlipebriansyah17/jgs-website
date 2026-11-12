@@ -1,13 +1,8 @@
-// GET /media/uploads/<file>  — menyajikan foto dari R2 (publik, hanya folder uploads/).
-export async function onRequestGet({ env, params }) {
-  const key = Array.isArray(params.path) ? params.path.join("/") : String(params.path || "");
-  if (!env.MEDIA || !/^uploads\/[A-Za-z0-9._-]+$/.test(key)) return new Response("Not found", { status: 404 });
-  const obj = await env.MEDIA.get(key);
-  if (!obj) return new Response("Not found", { status: 404 });
-  const headers = new Headers();
-  headers.set("Content-Type", (obj.httpMetadata && obj.httpMetadata.contentType) || "application/octet-stream");
-  headers.set("Cache-Control", "public, max-age=31536000, immutable");
-  headers.set("X-Content-Type-Options", "nosniff");
-  if (obj.httpEtag) headers.set("ETag", obj.httpEtag);
-  return new Response(obj.body, { headers });
+// CMS lama (D1/R2) sudah DINONAKTIFKAN. Admin sekarang memakai Decap CMS di /admin/.
+// Kode lama diarsipkan di _legacy-custom-cms/ (tidak dijalankan). File ini sengaja tanpa impor.
+export function onRequest() {
+  return new Response(JSON.stringify({ ok: false, error: "CMS lama sudah dinonaktifkan. Gunakan /admin/." }), {
+    status: 410,
+    headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" },
+  });
 }
