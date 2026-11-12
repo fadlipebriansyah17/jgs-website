@@ -1,9 +1,0 @@
-
-name = "jgs-website"
-compatibility_date = "2025-01-01"
-pages_build_output_dir = "public"
-
-[[d1_databases]]
-binding = "DB"
-database_name = "jgs-db"
-database_id = "da2d8b4b-4dc3-4099-b519-d1956660f396"
